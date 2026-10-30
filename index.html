@@ -76,5 +76,92 @@ Ticket availability, prices and authorized purchasing arrangements will be annou
 Talanta Match Tickets · Independent ticket information and booking service.<br>
 Not affiliated with FC Bayern Munich, AFC Ajax or the stadium operator.
 </footer>
+<section id="booking" class="booking-section">
+  <h2>Book Your Ticket</h2>
+  <p>Submit your booking enquiry for Bayern Munich vs Ajax.</p>
+
+  <form id="bookingForm">
+    <label>Full Name</label>
+    <input type="text" id="customerName" placeholder="Enter your full name" required>
+
+    <label>Phone Number</label>
+    <input type="tel" id="customerPhone" placeholder="Enter your phone number" required>
+
+    <label>Email Address</label>
+    <input type="email" id="customerEmail" placeholder="Enter your email" required>
+
+    <label>Ticket Category</label>
+    <select id="ticketType" required>
+      <option value="">Choose ticket category</option>
+      <option value="Regular">Regular</option>
+      <option value="Premium">Premium</option>
+      <option value="VIP">VIP</option>
+    </select>
+
+    <label>Number of Tickets</label>
+    <input type="number" id="ticketQuantity" min="1" max="10" value="1" required>
+
+    <button type="submit">Submit Booking Enquiry</button>
+  </form>
+
+  <p id="bookingMessage"></p>
+</section>
+
+<style>
+.booking-section {
+  max-width: 550px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #111827;
+  color: white;
+  border-radius: 12px;
+}
+.booking-section input,
+.booking-section select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 18px;
+  box-sizing: border-box;
+}
+.booking-section button {
+  padding: 13px;
+  width: 100%;
+  background: #d00000;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+
+<script>
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const reference = "TMT" + Date.now().toString().slice(-7);
+  const name = document.getElementById("customerName").value;
+  const phone = document.getElementById("customerPhone").value;
+  const email = document.getElementById("customerEmail").value;
+  const ticket = document.getElementById("ticketType").value;
+  const quantity = document.getElementById("ticketQuantity").value;
+
+  const message = `Hello, I would like to make a ticket enquiry.
+Reference: ${reference}
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Category: ${ticket}
+Quantity: ${quantity}`;
+
+  document.getElementById("bookingMessage").innerText =
+    "Your enquiry is ready. Please send it to the booking team.";
+
+  const whatsappNumber = "17806535513";
+  const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
+
+  window.location.href = url;
+});
+</script>
 </body>
 </html>
